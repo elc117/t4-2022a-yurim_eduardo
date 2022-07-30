@@ -14,25 +14,15 @@ public class MyGdxGame extends ApplicationAdapter {
 	private SpriteBatch batch;
 	private Plataform map;
 	private OrthographicCamera camera;
-	private Rectangle player;
-	private TextureRegion playerImage;
-	private Texture baseRunner;
+	private Player player;
 
 	@Override
 	public void create () {
-		baseRunner = new Texture(Gdx.files.internal("run.png"));
-		playerImage = new TextureRegion(baseRunner, 0, 0, 231, 190);
-		//teste acima
 		map = new Plataform();
 		batch = new SpriteBatch();
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, 1024, 512);
-		//player abaixo
-		player = new Rectangle();
-		player.x = 0;
-		player.y = 0;
-		player.width = 32;
-		player.height = 32;
+		this.player = new Player();
 	}
 
 	@Override
@@ -42,10 +32,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		batch.begin();
 		batch.setProjectionMatrix(camera.combined);
 		map.render(batch);
-		batch.draw(playerImage, player.x, player.y);
-		//batch.draw(baseRunner, player.x, player.y);
-		if(Gdx.input.isKeyPressed(Input.Keys.LEFT)) player.x -= 200 * Gdx.graphics.getDeltaTime();
-		if(Gdx.input.isKeyPressed(Input.Keys.RIGHT)) player.x += 200 * Gdx.graphics.getDeltaTime();
+		player.render(batch);
 		batch.end();
 	}
 
