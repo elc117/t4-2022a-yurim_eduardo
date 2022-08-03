@@ -11,14 +11,23 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.physics.box2d.*;
 
 
 public class PPJogo extends ApplicationAdapter {
      private OrthographicCamera camera;
      private Box2DDebugRenderer b2dr;
+     private OrthogonalTiledMapRenderer tmr;
+     private TiledMap map;
      private World world;
      private Body player, platform;
+     private SpriteBatch batch;
+     private Texture texture;
 
      private float PPM = 32; // pixels per meter
 
@@ -29,15 +38,20 @@ public class PPJogo extends ApplicationAdapter {
 	  
 	  world = new World(new Vector2(0, -9.8f), false);
 	  b2dr = new Box2DDebugRenderer();
+	  batch = new SpriteBatch();
 
+	  map = new TmxMapLoader().load("maps/map.tmx");
+	  tmr = new OrthogonalTiledMapRenderer(map);
+	  
 	  player = createBox(86f, 86f, 512, 512, true);
-	  platform = createBox(1024, 64, 512, 32, false);
      }
 
      @Override
      public void render () {
+	  ScreenUtils.clear(0f, 0f, 0f, 1f);	  
 	  update(Gdx.graphics.getDeltaTime());
-	  ScreenUtils.clear(0f, 0f, 0f, 1f);
+
+	  tmr.render();
 	  b2dr.render(world, camera.combined.scl(PPM));
      }
 
@@ -46,6 +60,8 @@ public class PPJogo extends ApplicationAdapter {
 	  world.step(1/60f, 6, 2);
 	  inputUpdate(delta);
 	  cameraUpdate(delta);
+	  tmr.setView(camera);	  
+	  batch.setProjectionMatrix(camera.combined);
      }
 
      private void inputUpdate (float delta) {
@@ -67,10 +83,6 @@ public class PPJogo extends ApplicationAdapter {
      }
      
      private void cameraUpdate (float delta) {
-//	  Vector3 position = camera.position;
-//	  position.x = player.getPosition().x * PPM;
-//	  position.y = player.getPosition().y * PPM;
-//	  camera.position.set(position);
 	  camera.update();
      }
 
@@ -102,5 +114,8 @@ public class PPJogo extends ApplicationAdapter {
      public void dispose () {
 	  b2dr.dispose();
 	  world.dispose();
+	  batch.dispose();
+	  tmr.dispose();
+	  map.dispose();
      }
 }
