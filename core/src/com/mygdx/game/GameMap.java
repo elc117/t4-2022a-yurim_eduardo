@@ -44,7 +44,7 @@ public class GameMap {
         for (int i = 0; i < objects.getCount(); i++) {
             RectangleMapObject obj = (RectangleMapObject)objects.get(i);
             Rectangle rect = obj.getRectangle();
-            gPhysics.rectangleCreate(world, rect, false);
+            gPhysics.rectangularBodyCreate(world, rect, false);
         }
     }
 }

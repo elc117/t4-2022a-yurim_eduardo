@@ -7,49 +7,39 @@ import com.badlogic.gdx.physics.box2d.World;
 
 public class GamePhysics {
 
-    public GamePhysics() {
-    }
+     public GamePhysics () {
+	  
+     }
 
-    public Body boxCreate (World world, int x, int y, float w, float h, boolean isDynamic) {
-        BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set(x, y);
+     private BodyDef bodyDefCreate (float x, float y, boolean isDynamic) {
+	  BodyDef bodyDef = new BodyDef();
+	  bodyDef.position.set(x, y);
 
-        if (isDynamic) {
-            bodyDef.type = BodyDef.BodyType.DynamicBody;
-        } else {
-            bodyDef.type = BodyDef.BodyType.StaticBody;
-        }
+	  if (isDynamic) {
+	       bodyDef.type = BodyDef.BodyType.DynamicBody;
+	  }
+	  else {
+	       bodyDef.type = BodyDef.BodyType.StaticBody;
+	  }
+	  
+	  return bodyDef;
+     }
 
-        Body body = world.createBody(bodyDef);
+     public Body rectangularBodyCreate (World world, Rectangle rect, boolean isDynamic) {
+	  float bodyX = ((rect.getX() + rect.getWidth() / 2) / Constants.TILE_SIZE);
+	  float bodyY = ((rect.getY() + rect.getHeight() / 2) / Constants.TILE_SIZE);
+	  float bodyW = rect.getWidth() / (Constants.TILE_SIZE * 2);
+	  float bodyH = rect.getHeight() / (Constants.TILE_SIZE * 2);
 
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(w, h);
-        body.createFixture(shape, 1);
+	  BodyDef bodyDef = bodyDefCreate(bodyX, bodyY, isDynamic);
 
-        shape.dispose();
-        return body;
-    }
-    public void rectangleCreate (World world, Rectangle rect, boolean isDynamic) {
-        float bodyX = ((rect.getX() + rect.getWidth() / 2) / Constants.TILE_SIZE);
-        float bodyY = ((rect.getY() + rect.getHeight() / 2) / Constants.TILE_SIZE);
-        float bodyW = rect.getWidth() / (Constants.TILE_SIZE * 2);
-        float bodyH = rect.getHeight() / (Constants.TILE_SIZE * 2);
+	  PolygonShape shape = new PolygonShape();
+	  shape.setAsBox(bodyW, bodyH);
 
-        BodyDef bodyDef = new BodyDef();
-        bodyDef.position.set(bodyX, bodyY);
+	  Body body = world.createBody(bodyDef);	  
+	  body.createFixture(shape, 1);
 
-        if (isDynamic) {
-            bodyDef.type = BodyDef.BodyType.DynamicBody;
-        }
-        else {
-            bodyDef.type = BodyDef.BodyType.StaticBody;
-        }
-
-        Body body = world.createBody(bodyDef);
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(bodyW, bodyH);
-        body.createFixture(shape, 1);
-
-        shape.dispose();
-    }
+	  shape.dispose();
+	  return body;
+     }
 }

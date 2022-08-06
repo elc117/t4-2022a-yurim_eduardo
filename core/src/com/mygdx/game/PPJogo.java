@@ -6,16 +6,15 @@ import com.badlogic.gdx.physics.box2d.*;
 
 public class PPJogo extends ApplicationAdapter {
 	private OrthographicCamera camera;
-	private Body player;
+	private Player player;     
 	private GameMap gMap;
-	GameInput gInput;
-	GamePhysics gPhysics;
+	private GameInput gInput;
+     
 	@Override
 	public void create () {
 		cameraCreate();
 		gMap = new GameMap(camera);
-		gPhysics = new GamePhysics();
-		player = gPhysics.boxCreate(gMap.getWorld(), 16, 8, 1, 1, true);
+		player = new Player(gMap.getWorld());
 		gInput = new GameInput();
 	}
 	@Override
