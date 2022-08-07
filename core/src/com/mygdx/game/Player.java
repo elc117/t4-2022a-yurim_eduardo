@@ -24,22 +24,25 @@ public class Player {
         fdef.shape = shape;
         body.createFixture(fdef).setUserData("player");
 
-        shape.setAsBox(1, 1, new Vector2(0, -1), 0);
+	float xSensor = (float) PLAYER_WIDTH / (TILE_SIZE * 2);
+	float ySensor = (float) PLAYER_HEIGHT / (TILE_SIZE * 2);
+	
+        shape.setAsBox(xSensor - 0.1f, 0, new Vector2(0, -ySensor), 0);
         fdef.shape = shape;
         fdef.isSensor = true;
         body.createFixture(fdef).setUserData("foot");
 
-        shape.setAsBox(1, 1, new Vector2(0, 1), 0);
+        shape.setAsBox(xSensor - 0.1f, 0, new Vector2(0, ySensor), 0);
         fdef.shape = shape;
         fdef.isSensor = true;
         body.createFixture(fdef).setUserData("head");
 
-        shape.setAsBox(1, 1, new Vector2(-1, 0), 0);
+        shape.setAsBox(0, ySensor - 0.1f, new Vector2(-xSensor, 0), 0);
         fdef.shape = shape;
         fdef.isSensor = true;
         body.createFixture(fdef).setUserData("left");
 
-        shape.setAsBox(1, 1, new Vector2(1, 0), 0);
+        shape.setAsBox(0, ySensor - 0.1f, new Vector2(xSensor, 0), 0);
         fdef.shape = shape;
         fdef.isSensor = true;
         body.createFixture(fdef).setUserData("right");
