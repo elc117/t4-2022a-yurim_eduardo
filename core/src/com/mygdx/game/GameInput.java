@@ -16,15 +16,15 @@ public class GameInput {
 	  Body pBody = player.getBody();
 	  int horizontalVelocity = 0;
 
-	  if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-	       horizontalVelocity--;
+	  if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && sideContact != LEFT_CONTACT) {
+	  	  horizontalVelocity--;
 	  }
-	  if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-	       horizontalVelocity++;
+	  if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && sideContact != RIGHT_CONTACT) {
+	  	  horizontalVelocity++;
 	  }
 	  if (Gdx.input.isKeyPressed(Input.Keys.UP) && playerOnGround) {
-	       pBody.applyForceToCenter(0, 300, false);
-		   player.setCurrentState(State.JUMPING);
+	  	  pBody.applyForceToCenter(0, 300, false);
+	  	  player.setCurrentState(State.JUMPING);
 	  }
 
 	  pBody.setLinearVelocity(horizontalVelocity * 5,

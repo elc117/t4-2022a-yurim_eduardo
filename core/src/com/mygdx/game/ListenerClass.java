@@ -9,12 +9,11 @@ public class ListenerClass implements ContactListener {
     public ListenerClass(Player player) {
         this.player = player;
     }
-
     @Override
     public void beginContact(Contact contact) {
         fA = contact.getFixtureA();
         fB = contact.getFixtureB();
-        System.out.println("alexa");
+
         if (fA.getUserData() != null && fA.getUserData().equals("foot")){
             playerOnGround = true;
             player.setCurrentState(State.IDLE);
@@ -30,10 +29,27 @@ public class ListenerClass implements ContactListener {
         if (fB.getUserData() != null && fB.getUserData().equals("head")){
             playerOnGround = false;
             player.setCurrentState(State.FALLING);
+        }
+        if (fA.getUserData() != null && fA.getUserData().equals("left")){
+            System.out.println("fa left begin");
+            sideContact = LEFT_CONTACT;
+        }
+        if (fB.getUserData() != null && fB.getUserData().equals("left")){
+            System.out.println("fb left begin");
+            sideContact = LEFT_CONTACT;
+        }
+        if (fA.getUserData() != null && fA.getUserData().equals("right")){
+            sideContact = RIGHT_CONTACT;
+        }
+        if (fB.getUserData() != null && fB.getUserData().equals("right")){
+            sideContact = RIGHT_CONTACT;
         }
     }
     @Override
     public void endContact(Contact contact) {
+        fA = contact.getFixtureA();
+        fB = contact.getFixtureB();
+
         if (fA.getUserData() != null && fA.getUserData().equals("foot")){
             playerOnGround = false;
             player.setCurrentState(State.JUMPING);
@@ -42,14 +58,25 @@ public class ListenerClass implements ContactListener {
             playerOnGround = false;
             player.setCurrentState(State.JUMPING);
         }
-
         if (fA.getUserData() != null && fA.getUserData().equals("head")){
-            playerOnGround = true;
             player.setCurrentState(State.FALLING);
         }
         if (fB.getUserData() != null && fB.getUserData().equals("head")){
-            playerOnGround = true;
             player.setCurrentState(State.FALLING);
+        }
+        if (fA.getUserData() != null && fA.getUserData().equals("left")){
+            System.out.println("fa left end");
+            sideContact = NO_CONTACT;
+        }
+        if (fB.getUserData() != null && fB.getUserData().equals("left")){
+            System.out.println("fb left end");
+            sideContact = NO_CONTACT;
+        }
+        if (fA.getUserData() != null && fA.getUserData().equals("right")){
+            sideContact = NO_CONTACT;
+        }
+        if (fB.getUserData() != null && fB.getUserData().equals("right")){
+            sideContact = NO_CONTACT;
         }
     }
     @Override

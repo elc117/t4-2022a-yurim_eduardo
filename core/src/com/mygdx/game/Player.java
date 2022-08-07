@@ -33,6 +33,16 @@ public class Player {
         fdef.shape = shape;
         fdef.isSensor = true;
         body.createFixture(fdef).setUserData("head");
+
+        shape.setAsBox(1, 1, new Vector2(-1, 0), 0);
+        fdef.shape = shape;
+        fdef.isSensor = true;
+        body.createFixture(fdef).setUserData("left");
+
+        shape.setAsBox(1, 1, new Vector2(1, 0), 0);
+        fdef.shape = shape;
+        fdef.isSensor = true;
+        body.createFixture(fdef).setUserData("right");
     }
     public Body getBody () {
         return body;
