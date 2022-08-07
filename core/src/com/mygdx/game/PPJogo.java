@@ -2,7 +2,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.physics.box2d.*;
+import static com.mygdx.game.Constants.*;
 
 public class PPJogo extends ApplicationAdapter {
 	private OrthographicCamera camera;
@@ -15,7 +15,7 @@ public class PPJogo extends ApplicationAdapter {
 		cameraCreate();
 		gMap = new GameMap(camera);
 		player = new Player(gMap.getWorld());
-		gInput = new GameInput();
+		gInput = new GameInput(gMap.getWorld(), player);
 	}
 	@Override
 	public void render () {
@@ -24,7 +24,7 @@ public class PPJogo extends ApplicationAdapter {
 		gMap.renderGameMap(camera);
 	}
 	private void cameraCreate () {
-		camera = new OrthographicCamera(Constants.WORLD_WIDTH, Constants.WORLD_HEIGHT);
+		camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
 		camera.position.set(camera.viewportWidth / 2f, camera.viewportHeight / 2f, 0);
 		camera.update();
 	}

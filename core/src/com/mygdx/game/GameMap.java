@@ -9,8 +9,6 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.*;
 import com.badlogic.gdx.maps.objects.*;
 
-import java.awt.*;
-
 public class GameMap {
     private final World world;
     private final Box2DDebugRenderer debugRenderer;
@@ -24,7 +22,6 @@ public class GameMap {
         gPhysics = new GamePhysics();
         map = new TmxMapLoader().load("tileset/ground.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map, 1f / Constants.TILE_SIZE);
-
         embodyTiles(world, map);
 
         mapRenderer.setView(camera);
