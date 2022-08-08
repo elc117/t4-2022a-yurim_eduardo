@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="512" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="20">
+<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="512" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="20">
  <tileset firstgid="1" source="tileset.tsx"/>
- <layer id="1" name="Camada de Tiles 1" width="512" height="16">
+ <layer id="4" name="camada2" width="512" height="16">
   <data encoding="base64" compression="zlib">
-   eJzt2F9KQkEUwOFZTzuxfPDdSgxcQA9WCwjKduCfHWStsSMomPgwmTN3wO+DH9w7cOG8ncukBAAAAPDbc/TS9RAAQFWz6KPrIQCAqpbRqushAIAiptHTkfOv6LvyLABAHW/R+8FZL7rO7KbapADAucyjxcHZMLrNqB+Nq00KAPzHYO/5M1rvvT+k/P1/t/1mUnheAOA0uff5m0Ypf/9Pkv0PAK3K2ed/7T66SvY/ALSqxP7f/QMcu0MAALpXav/vAgDaY/8DwOV5LRwA0J7HwgEA7fkBYD1YOQ==
+   eJzt2DsKwkAYhdEBd5Ed+Si1ihYWaidkDbpwMwQhSDQm5AVzDnyFhWKqy58shJBNGAAwvym33/4DwDLYfwBIj/0HgPTYfwBIj/0HgPSMsd/2HwCWzf4DQHrsPwDQpOt2238ASE+X/d936NDw/XXZpqXtMI8FAPQQ939V+3wpu3bo1vCbedmxpdPwjwIA/FDf4V3ZOVS7Xy/e9n3v+Lj/z5bsPwBMp+kO/9z+9zuAvnd8/sf/sP8AMK14f8e7/x6+73/b/S5JkoZtTEWtR6je/ReSJGn2XvA2Dp0=
+  </data>
+ </layer>
+ <layer id="1" name="camada1" width="512" height="16">
+  <data encoding="base64" compression="zlib">
+   eJzt2ElKA0EUBuA6jzdxWLhIVhpFIXHtwmEfweEGDjdwOKNPSKC7SEzZpitZfB/8JF10wavVX3RKAAAAAG03kdtNDwEAVPUYedr0EABAVa+Rt00PAQD04ipyvWD9M/JVeRYAoI77yEO2thvZK8x+tUkBgHV5jrxka0eR44IcRM6qTQoA/Mdh4/975KPxfJ7K+3802zPueV4AoJvS7/k/OU3l/T9O+h8AtlVJn/81J5GdtLr/B7MM13kgAGClPvp/fgdY9A2haZLad4BBlmFq3w3cFQBgPfrq/3l+k3f9JMvFLMveLz0DANBWs/9H2XPe9fPfZfL3S88AALTdVcw0crkk0477u+7rMwCw7Wp1oZ4EgO3xDWcfi0U=
   </data>
  </layer>
  <objectgroup id="2" name="ground">
