@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="512" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="5" nextobjectid="20">
+<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="512" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="7" nextobjectid="22">
  <tileset firstgid="1" source="tileset.tsx"/>
  <layer id="4" name="camada2" width="512" height="16">
   <data encoding="base64" compression="zlib">
@@ -19,5 +19,7 @@
   <object id="13" x="704.667" y="352.667" width="191.333" height="30"/>
   <object id="14" x="674.667" y="223.333" width="28.6667" height="128.667"/>
   <object id="18" x="-40" y="0" width="40.6667" height="290.667"/>
+  <object id="20" x="1088" y="383.333" width="320" height="84.6667"/>
+  <object id="21" x="1536" y="318" width="320.667" height="146"/>
  </objectgroup>
 </map>
