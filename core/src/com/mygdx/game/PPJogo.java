@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -12,6 +13,7 @@ public class PPJogo extends ApplicationAdapter {
     private Player player;
     private GameMap gMap;
     private GameInput gInput;
+    private SpriteBatch batch;
 
     @Override
     public void create() {
@@ -20,6 +22,7 @@ public class PPJogo extends ApplicationAdapter {
         gMap = new GameMap(camera);
         player = new Player(gMap.getWorld());
         gInput = new GameInput(gMap.getWorld(), player);
+        batch = new SpriteBatch();
     }
 
     @Override
@@ -29,12 +32,20 @@ public class PPJogo extends ApplicationAdapter {
         gInput.inputUpdate(player);
         gMap.update(camera);
         gMap.renderGameMap(camera);
+        batch.setProjectionMatrix(camera.combined);
+        batch.begin();
+        player.render(batch, camera);
+        batch.end();
     }
 
     private void cameraUpdate() {
         Vector3 v3 = new Vector3();
-        v3.x = player.getBody().getPosition().x;
-        v3.y = player.getBody().getPosition().y;
+        if (player.getBody().getPosition().x > 16) {
+            v3.x = player.getBody().getPosition().x;
+        } else {
+            v3.x = 16;
+        }
+        v3.y = 8;
         camera.position.set(v3);
         camera.update();
     }
