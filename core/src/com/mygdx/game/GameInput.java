@@ -23,7 +23,7 @@ public class GameInput {
 	  	  horizontalVelocity++;
 	  }
 	  if (Gdx.input.isKeyPressed(Input.Keys.UP) && playerOnGround) {
-	  	  pBody.applyForceToCenter(0, 300, false);
+	  	  pBody.applyForceToCenter(0, 600, false);
 	  	  player.setCurrentState(State.JUMPING);
 	  }
 

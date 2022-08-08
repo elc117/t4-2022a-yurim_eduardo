@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="32" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="3" nextobjectid="8">
+<map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="512" height="16" tilewidth="32" tileheight="32" infinite="0" nextlayerid="4" nextobjectid="20">
  <tileset firstgid="1" source="tileset.tsx"/>
- <layer id="1" name="Camada de Tiles 1" width="32" height="16">
+ <layer id="1" name="Camada de Tiles 1" width="512" height="16">
   <data encoding="base64" compression="zlib">
-   eJxjYBgFo2AUjALqAiYceLACXO4dzG4eBZQDfPFODywywBgAMd8C2w==
+   eJzt2F9KQkEUwOFZTzuxfPDdSgxcQA9WCwjKduCfHWStsSMomPgwmTN3wO+DH9w7cOG8ncukBAAAAPDbc/TS9RAAQFWz6KPrIQCAqpbRqushAIAiptHTkfOv6LvyLABAHW/R+8FZL7rO7KbapADAucyjxcHZMLrNqB+Nq00KAPzHYO/5M1rvvT+k/P1/t/1mUnheAOA0uff5m0Ypf/9Pkv0PAK3K2ed/7T66SvY/ALSqxP7f/QMcu0MAALpXav/vAgDaY/8DwOV5LRwA0J7HwgEA7fkBYD1YOQ==
   </data>
  </layer>
  <objectgroup id="2" name="ground">
-  <object id="5" x="0" y="446.667" width="1022.67" height="66.6667"/>
-  <object id="6" x="65.3333" y="317.333" width="221.333" height="38.6667"/>
-  <object id="7" x="704" y="254.667" width="194.667" height="37.3333"/>
+  <object id="2" x="0.666667" y="287.333" width="384" height="31.3333"/>
+  <object id="7" x="352" y="191.333" width="383.333" height="32.6667"/>
+  <object id="9" x="352" y="223.333" width="32" height="64.6667"/>
+  <object id="11" x="702" y="220.667" width="33.3333" height="35.3333"/>
+  <object id="13" x="704.667" y="352.667" width="191.333" height="30"/>
+  <object id="14" x="674.667" y="223.333" width="28.6667" height="128.667"/>
+  <object id="18" x="-40" y="0" width="40.6667" height="290.667"/>
  </objectgroup>
 </map>
