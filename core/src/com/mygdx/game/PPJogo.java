@@ -14,7 +14,7 @@ public class PPJogo extends ApplicationAdapter {
     private GameMap gMap;
     private GameInput gInput;
     private SpriteBatch batch;
-     private int frameCount = 0;
+    private int frameCount = 0;
 
     @Override
     public void create() {
@@ -28,11 +28,11 @@ public class PPJogo extends ApplicationAdapter {
 
     @Override
     public void render() {
-	frameCount++;	 	 
-	if (frameCount >= 60) {
-	     frameCount = 0;
-	}
-	
+        frameCount++;
+        if (frameCount >= 60) {
+            frameCount = 0;
+        }
+
         cameraUpdate();
         ScreenUtils.clear(0.4f, 0.71f, 1, 1);
         gInput.inputUpdate(player);
@@ -46,8 +46,11 @@ public class PPJogo extends ApplicationAdapter {
 
     private void cameraUpdate() {
         Vector3 v3 = new Vector3();
-        if (player.getBody().getPosition().x > 16) {
+
+        if (player.getBody().getPosition().x > 16 && player.getBody().getPosition().x < 496) {
             v3.x = player.getBody().getPosition().x;
+        } else if (player.getBody().getPosition().x >= 496) {
+            v3.x = 496;
         } else {
             v3.x = 16;
         }
