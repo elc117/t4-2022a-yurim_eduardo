@@ -14,6 +14,7 @@ public class Constants {
     public static int sideContact = NO_CONTACT;
     public static boolean playerOnGround = true;
     public static boolean rightHandSide = true;
+     public static boolean paused = true;
 
     public enum State {IDLE, RUNNING_RIGHT, RUNNING_LEFT, JUMPING, FALLING}
 

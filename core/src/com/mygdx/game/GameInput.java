@@ -14,26 +14,40 @@ public class GameInput {
     }
 
     public void inputUpdate(Player player) {
-        Body pBody = player.getBody();
-        int horizontalVelocity = 0;
+	 Body pBody = player.getBody();
+	 int horizontalVelocity = 0;
+	 	 
+	 if (paused && Gdx.input.isKeyPressed(Input.Keys.ENTER)) {
+	      paused = false;
+	      pBody.setAwake(true);
+	 }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && sideContact != LEFT_CONTACT) {
-            horizontalVelocity--;
-            player.setCurrentState(State.RUNNING_LEFT);
-            rightHandSide = false;
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && sideContact != RIGHT_CONTACT) {
-            horizontalVelocity++;
-            player.setCurrentState(State.RUNNING_RIGHT);
-            rightHandSide = true;
-        }
-        if (horizontalVelocity == 0) {
-            player.setCurrentState(State.IDLE);
-        }
-        if (Gdx.input.isKeyPressed(Input.Keys.UP) && playerOnGround) {
-            pBody.applyForceToCenter(0, 600, false);
-        }
+	 if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+	      paused = true;
+	 }
 
-        pBody.setLinearVelocity(horizontalVelocity * 5, pBody.getLinearVelocity().y);
+	 if (paused) {
+	      pBody.setAwake(false);
+	      return;
+	 }
+	 
+	 if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && sideContact != LEFT_CONTACT) {
+	      horizontalVelocity--;
+	      player.setCurrentState(State.RUNNING_LEFT);
+	      rightHandSide = false;
+	 }
+	 if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && sideContact != RIGHT_CONTACT) {
+	      horizontalVelocity++;
+	      player.setCurrentState(State.RUNNING_RIGHT);
+	      rightHandSide = true;
+	 }
+	 if (horizontalVelocity == 0) {
+	      player.setCurrentState(State.IDLE);
+	 }
+	 if (Gdx.input.isKeyPressed(Input.Keys.UP) && playerOnGround) {
+	      pBody.applyForceToCenter(0, 600, false);
+	 }
+
+	 pBody.setLinearVelocity(horizontalVelocity * 5, pBody.getLinearVelocity().y);
     }
 }

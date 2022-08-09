@@ -65,7 +65,7 @@ public class Player {
             currentRegion = idleLeft;
         }
 
-        if (frameCount % 5 == 0) {
+        if (!paused && frameCount % 5 == 0) {
             spriteIndex++;
             if (spriteIndex >= currentRegion.size()) {
                 spriteIndex = 0;
