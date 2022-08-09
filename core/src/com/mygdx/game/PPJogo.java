@@ -14,6 +14,7 @@ public class PPJogo extends ApplicationAdapter {
     private GameMap gMap;
     private GameInput gInput;
     private SpriteBatch batch;
+     private int frameCount = 0;
 
     @Override
     public void create() {
@@ -27,6 +28,11 @@ public class PPJogo extends ApplicationAdapter {
 
     @Override
     public void render() {
+	frameCount++;	 	 
+	if (frameCount >= 60) {
+	     frameCount = 0;
+	}
+	
         cameraUpdate();
         ScreenUtils.clear(0.4f, 0.71f, 1, 1);
         gInput.inputUpdate(player);
@@ -34,8 +40,11 @@ public class PPJogo extends ApplicationAdapter {
         gMap.renderGameMap(camera);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        player.render(batch, camera);
+        player.render(batch, camera, frameCount);
         batch.end();
+	
+
+
     }
 
     private void cameraUpdate() {
