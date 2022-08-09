@@ -42,9 +42,6 @@ public class PPJogo extends ApplicationAdapter {
         batch.begin();
         player.render(batch, camera, frameCount);
         batch.end();
-	
-
-
     }
 
     private void cameraUpdate() {

@@ -12,21 +12,30 @@ import java.util.ArrayList;
 import static com.mygdx.game.Constants.*;
 
 public class Player {
-     private ArrayList<TextureRegion> regions;
+     private ArrayList<TextureRegion> idleRight;
+     private ArrayList<TextureRegion> idleLeft;
+     private ArrayList<TextureRegion> runningRight;
+     private ArrayList<TextureRegion> runningLeft;          
      private int spriteIndex = 0;
-     private int spriteSize = 6;
      private Body body;
-     private Texture tPlayer;
      private TextureRegion trPlayer;
      private State currentState = State.IDLE;
+     private State previousState = State.IDLE;
 
      public Player(World world) {
 	  PolygonShape shape = new PolygonShape();
 	  BodyDef bdef = new BodyDef();
 	  FixtureDef fdef = new FixtureDef();
 
-	  tPlayer = new Texture(Gdx.files.internal("Blue_witch/B_witch_idle.png"));
-	  regions = arrayListInitialize(tPlayer, spriteSize);
+	  Texture texture;
+	  texture = new Texture(Gdx.files.internal("Blue_witch/B_witch_idle.png"));
+	  idleRight = arrayListInitialize(texture, 6, false);
+	  texture = new Texture(Gdx.files.internal("Blue_witch/B_witch_idle.png"));
+	  idleLeft = arrayListInitialize(texture, 6, true);	  
+	  texture = new Texture(Gdx.files.internal("Blue_witch/B_witch_run.png"));
+	  runningRight = arrayListInitialize(texture, 8, false);	  
+	  texture = new Texture(Gdx.files.internal("Blue_witch/B_witch_run.png"));
+	  runningLeft = arrayListInitialize(texture, 8, true);
 
 	  bdef.position.set(16 + PLAYER_WIDTH / 64f, 10 + PLAYER_HEIGHT / 64f);
 	  bdef.type = BodyDef.BodyType.DynamicBody;
@@ -64,7 +73,7 @@ public class Player {
 
      }
 
-     private ArrayList<TextureRegion> arrayListInitialize (Texture texture, int size) {
+     private ArrayList<TextureRegion> arrayListInitialize (Texture texture, int size, boolean flip) {
 	  // podemos retornar o array
 	  TextureRegion region;
 	  ArrayList<TextureRegion> regions = new ArrayList<TextureRegion>();
@@ -74,24 +83,45 @@ public class Player {
 					  i * SPRITE_HEIGHT,
 					  SPRITE_WIDTH,
 					  SPRITE_HEIGHT);
-	       regions.add(region);				  
+	       if (flip) {
+		    region.flip(true, false);
+		    regions.add(region);
+	       } else {
+		    regions.add(region);
+	       }
 	  }
 	  return regions;
      }
      
      public void render(SpriteBatch batch, OrthographicCamera camera, int frameCount) {
+	  ArrayList<TextureRegion> currentRegion;
+
+	  if (currentState != previousState) {
+	       spriteIndex = 0;
+	  }
+	  
+	  if (currentState == State.RUNNING_RIGHT) {
+	       currentRegion = runningRight;
+	  } else if (currentState == State.RUNNING_LEFT) {
+	       currentRegion = runningLeft;
+	  } else if (rightHandSide) {
+	       currentRegion = idleRight;
+	  } else {
+	       currentRegion = idleLeft;
+	  }
+
 	  if (frameCount % 5 == 0) {
 	       spriteIndex++;	       
-	       if (spriteIndex >= spriteSize) {
+	       if (spriteIndex >= currentRegion.size()) {
 		    spriteIndex = 0;
 	       }
 	  }
 	  
-	  batch.draw(regions.get(spriteIndex),
+	  batch.draw(currentRegion.get(spriteIndex),
 		     body.getPosition().x - SPRITE_WIDTH / TILE_SIZE,
 		     body.getPosition().y - SPRITE_HEIGHT / TILE_SIZE - 0.3f,
 		     SPRITE_WIDTH / (TILE_SIZE / 2),
-		     SPRITE_HEIGHT / (TILE_SIZE / 2));	  
+		     SPRITE_HEIGHT / (TILE_SIZE / 2));  
 
      }
 
@@ -104,6 +134,7 @@ public class Player {
      }
 
      public void setCurrentState(State currentState) {
+	  previousState = this.currentState;
 	  this.currentState = currentState;
      }
 }

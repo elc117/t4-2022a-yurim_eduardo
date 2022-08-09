@@ -9,7 +9,7 @@ import static com.mygdx.game.Constants.*;
 public class GameInput {
 
      public GameInput(World world, Player player) {
-		 world.setContactListener(new ListenerClass(player));
+	  world.setContactListener(new ListenerClass(player));
      }
 
      public void inputUpdate (Player player) {
@@ -17,14 +17,20 @@ public class GameInput {
 	  int horizontalVelocity = 0;
 
 	  if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && sideContact != LEFT_CONTACT) {
-	  	  horizontalVelocity--;
+	       horizontalVelocity--;
+	       player.setCurrentState(State.RUNNING_LEFT);
+	       rightHandSide = false;
 	  }
 	  if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) && sideContact != RIGHT_CONTACT) {
-	  	  horizontalVelocity++;
+	       horizontalVelocity++;
+	       player.setCurrentState(State.RUNNING_RIGHT);
+	       rightHandSide = true;
+	  }
+	  if (horizontalVelocity == 0) {
+	       player.setCurrentState(State.IDLE);
 	  }
 	  if (Gdx.input.isKeyPressed(Input.Keys.UP) && playerOnGround) {
-	  	  pBody.applyForceToCenter(0, 600, false);
-	  	  player.setCurrentState(State.JUMPING);
+	       pBody.applyForceToCenter(0, 600, false);
 	  }
 
 	  pBody.setLinearVelocity(horizontalVelocity * 5,

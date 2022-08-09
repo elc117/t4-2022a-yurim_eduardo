@@ -16,19 +16,15 @@ public class ListenerClass implements ContactListener {
 
         if (fA.getUserData() != null && fA.getUserData().equals("foot")){
             playerOnGround = true;
-            player.setCurrentState(State.IDLE);
         }
         if (fB.getUserData() != null && fB.getUserData().equals("foot")){
             playerOnGround = true;
-            player.setCurrentState(State.IDLE);
         }
         if (fA.getUserData() != null && fA.getUserData().equals("head")){
             playerOnGround = false;
-            player.setCurrentState(State.FALLING);
         }
         if (fB.getUserData() != null && fB.getUserData().equals("head")){
             playerOnGround = false;
-            player.setCurrentState(State.FALLING);
         }
         if (fA.getUserData() != null && fA.getUserData().equals("left")){
             System.out.println("fa left begin");
@@ -52,17 +48,9 @@ public class ListenerClass implements ContactListener {
 
         if (fA.getUserData() != null && fA.getUserData().equals("foot")){
             playerOnGround = false;
-            player.setCurrentState(State.JUMPING);
         }
         if (fB.getUserData() != null && fB.getUserData().equals("foot")){
             playerOnGround = false;
-            player.setCurrentState(State.JUMPING);
-        }
-        if (fA.getUserData() != null && fA.getUserData().equals("head")){
-            player.setCurrentState(State.FALLING);
-        }
-        if (fB.getUserData() != null && fB.getUserData().equals("head")){
-            player.setCurrentState(State.FALLING);
         }
         if (fA.getUserData() != null && fA.getUserData().equals("left")){
             System.out.println("fa left end");
