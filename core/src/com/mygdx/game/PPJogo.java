@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -54,6 +56,7 @@ public class PPJogo extends ApplicationAdapter {
         } else {
             v3.x = 16;
         }
+
         v3.y = 8;
         camera.position.set(v3);
         camera.update();

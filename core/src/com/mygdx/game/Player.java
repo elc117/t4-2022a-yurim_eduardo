@@ -24,56 +24,8 @@ public class Player {
     private State previousState = State.IDLE;
 
     public Player(World world) {
-        PolygonShape shape = new PolygonShape();
-        BodyDef bdef = new BodyDef();
-        FixtureDef fdef = new FixtureDef();
-
-        Texture texture;
-        texture = new Texture(Gdx.files.internal("Blue_witch/B_witch_idle.png"));
-        idleRight = arrayListInitialize(texture, 6, false);
-        texture = new Texture(Gdx.files.internal("Blue_witch/B_witch_idle.png"));
-        idleLeft = arrayListInitialize(texture, 6, true);
-        texture = new Texture(Gdx.files.internal("Blue_witch/B_witch_run.png"));
-        runningRight = arrayListInitialize(texture, 8, false);
-        texture = new Texture(Gdx.files.internal("Blue_witch/B_witch_run.png"));
-        runningLeft = arrayListInitialize(texture, 8, true);
-
-        bdef.position.set(16 + PLAYER_WIDTH / 64f, 10 + PLAYER_HEIGHT / 64f);
-		//bdef.position.set(490 + PLAYER_WIDTH / 64f, 10 + PLAYER_HEIGHT / 64f);//teste posicao fim do mapa
-
-        bdef.type = BodyDef.BodyType.DynamicBody;
-        body = world.createBody(bdef);
-        MassData md = new MassData();
-        md.mass = 2;
-        body.setMassData(md);
-
-        shape.setAsBox((float) PLAYER_WIDTH / (TILE_SIZE * 2), (float) SPRITE_HEIGHT / (TILE_SIZE * 2));
-        fdef.shape = shape;
-        body.createFixture(fdef).setUserData("player");
-
-        float xSensor = (float) PLAYER_WIDTH / (TILE_SIZE * 2);
-        float ySensor = (float) SPRITE_HEIGHT / (TILE_SIZE * 2);
-
-        shape.setAsBox(xSensor - 0.1f, 0, new Vector2(0, -ySensor), 0);
-        fdef.shape = shape;
-        fdef.isSensor = true;
-        body.createFixture(fdef).setUserData("foot");
-
-        shape.setAsBox(xSensor - 0.1f, 0, new Vector2(0, ySensor), 0);
-        fdef.shape = shape;
-        fdef.isSensor = true;
-        body.createFixture(fdef).setUserData("head");
-
-        shape.setAsBox(0, ySensor - 0.1f, new Vector2(-xSensor, 0), 0);
-        fdef.shape = shape;
-        fdef.isSensor = true;
-        body.createFixture(fdef).setUserData("left");
-
-        shape.setAsBox(0, ySensor - 0.1f, new Vector2(xSensor, 0), 0);
-        fdef.shape = shape;
-        fdef.isSensor = true;
-        body.createFixture(fdef).setUserData("right");
-
+        createSprites();
+        createFixtures(world);
     }
 
     private ArrayList<TextureRegion> arrayListInitialize(Texture texture, int size, boolean flip) {
@@ -121,11 +73,64 @@ public class Player {
         }
 
         batch.draw(currentRegion.get(spriteIndex),
-                body.getPosition().x - SPRITE_WIDTH / TILE_SIZE,
-                body.getPosition().y - SPRITE_HEIGHT / TILE_SIZE - 0.3f,
-                SPRITE_WIDTH / (TILE_SIZE / 2),
-                SPRITE_HEIGHT / (TILE_SIZE / 2));
+                body.getPosition().x - (float) SPRITE_WIDTH / TILE_SIZE,
+                body.getPosition().y - (float) SPRITE_HEIGHT / TILE_SIZE,
+                (float) SPRITE_WIDTH / (TILE_SIZE / 2f),
+                (float) SPRITE_HEIGHT / (TILE_SIZE / 2f));
+    }
 
+    private void createSprites() {
+        Texture texture;
+        texture = new Texture(Gdx.files.internal("Blue_witch/B_witch_idle.png"));
+        idleRight = arrayListInitialize(texture, 6, false);
+        texture = new Texture(Gdx.files.internal("Blue_witch/B_witch_idle.png"));
+        idleLeft = arrayListInitialize(texture, 6, true);
+        texture = new Texture(Gdx.files.internal("Blue_witch/B_witch_run.png"));
+        runningRight = arrayListInitialize(texture, 8, false);
+        texture = new Texture(Gdx.files.internal("Blue_witch/B_witch_run.png"));
+        runningLeft = arrayListInitialize(texture, 8, true);
+    }
+
+    private void createFixtures(World world) {
+        PolygonShape shape = new PolygonShape();
+        BodyDef bdef = new BodyDef();
+        FixtureDef fdef = new FixtureDef();
+
+        bdef.position.set(16 + PLAYER_WIDTH / 64f, 10 + PLAYER_HEIGHT / 64f);
+        //bdef.position.set(490 + PLAYER_WIDTH / 64f, 10 + PLAYER_HEIGHT / 64f);//teste posicao fim do mapa
+
+        bdef.type = BodyDef.BodyType.DynamicBody;
+        body = world.createBody(bdef);
+        MassData md = new MassData();
+        md.mass = 2;
+        body.setMassData(md);
+
+        shape.setAsBox((float) PLAYER_WIDTH / (TILE_SIZE * 2), (float) SPRITE_HEIGHT / (TILE_SIZE * 2));
+        fdef.shape = shape;
+        body.createFixture(fdef).setUserData("player");
+
+        float xSensor = (float) PLAYER_WIDTH / (TILE_SIZE * 2);
+        float ySensor = (float) SPRITE_HEIGHT / (TILE_SIZE * 2);
+
+        shape.setAsBox(xSensor - 0.1f, 0, new Vector2(0, -ySensor), 0);
+        fdef.shape = shape;
+        fdef.isSensor = true;
+        body.createFixture(fdef).setUserData("foot");
+
+        shape.setAsBox(xSensor - 0.1f, 0, new Vector2(0, ySensor), 0);
+        fdef.shape = shape;
+        fdef.isSensor = true;
+        body.createFixture(fdef).setUserData("head");
+
+        shape.setAsBox(0, ySensor - 0.1f, new Vector2(-xSensor, 0), 0);
+        fdef.shape = shape;
+        fdef.isSensor = true;
+        body.createFixture(fdef).setUserData("left");
+
+        shape.setAsBox(0, ySensor - 0.1f, new Vector2(xSensor, 0), 0);
+        fdef.shape = shape;
+        fdef.isSensor = true;
+        body.createFixture(fdef).setUserData("right");
     }
 
     public Body getBody() {

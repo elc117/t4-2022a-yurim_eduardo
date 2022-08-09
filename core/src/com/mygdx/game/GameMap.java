@@ -1,5 +1,4 @@
 package com.mygdx.game;
-
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
@@ -23,11 +22,8 @@ public class GameMap {
         debugRenderer = new Box2DDebugRenderer();
         gPhysics = new GamePhysics();
         map = new TmxMapLoader().load("tileset/ground.tmx");
-
         mapRenderer = new OrthogonalTiledMapRenderer(map, 1f / Constants.TILE_SIZE);
         embodyTiles(world, map);
-
-        //mapRenderer.setView(camera);
     }
     public void update (OrthographicCamera camera){
         mapRenderer.setView(camera);

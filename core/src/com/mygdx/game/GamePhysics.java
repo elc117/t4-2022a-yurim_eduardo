@@ -9,9 +9,7 @@ import com.badlogic.gdx.physics.box2d.World;
 public class GamePhysics {
 
     public GamePhysics() {
-
     }
-
     public BodyDef bodyDefCreate(float x, float y, boolean isDynamic) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(x, y);
