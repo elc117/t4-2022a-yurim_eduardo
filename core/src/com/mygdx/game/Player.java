@@ -21,8 +21,8 @@ public class Player {
         BodyDef bdef = new BodyDef();
         FixtureDef fdef = new FixtureDef();
 
-        tPlayer = new Texture(Gdx.files.internal("warrior/_Idle.png"));
-        trPlayer = new TextureRegion(tPlayer, 47, 0, 25, 40);
+        tPlayer = new Texture(Gdx.files.internal("Blue_witch/B_witch_idle.png"));
+        trPlayer = new TextureRegion(tPlayer, 0, 0, SPRITE_WIDTH, SPRITE_HEIGHT);
 
         bdef.position.set(16 + PLAYER_WIDTH / 64f, 10 + PLAYER_HEIGHT / 64f);
         bdef.type = BodyDef.BodyType.DynamicBody;
@@ -31,12 +31,12 @@ public class Player {
         md.mass = 2;
         body.setMassData(md);
 
-        shape.setAsBox((float) PLAYER_WIDTH / (TILE_SIZE * 2), (float) PLAYER_HEIGHT / (TILE_SIZE * 2));
+        shape.setAsBox((float) PLAYER_WIDTH / (TILE_SIZE * 2), (float) SPRITE_HEIGHT / (TILE_SIZE * 2));
         fdef.shape = shape;
         body.createFixture(fdef).setUserData("player");
 
         float xSensor = (float) PLAYER_WIDTH / (TILE_SIZE * 2);
-        float ySensor = (float) PLAYER_HEIGHT / (TILE_SIZE * 2);
+        float ySensor = (float) SPRITE_HEIGHT / (TILE_SIZE * 2);
 
         shape.setAsBox(xSensor - 0.1f, 0, new Vector2(0, -ySensor), 0);
         fdef.shape = shape;
@@ -61,8 +61,12 @@ public class Player {
     }
 
     public void render(SpriteBatch batch, OrthographicCamera camera) {
-//      batch.draw(trPlayer, body.getPosition().x, body.getPosition().y);
-        batch.draw(trPlayer, body.getPosition().x, body.getPosition().y, 32, 16);
+
+	 batch.draw(trPlayer,
+		    body.getPosition().x - SPRITE_WIDTH / TILE_SIZE,
+		    body.getPosition().y - SPRITE_HEIGHT / TILE_SIZE - 0.3f,
+		    SPRITE_WIDTH / (TILE_SIZE / 2),
+		    SPRITE_HEIGHT / (TILE_SIZE / 2));
     }
 
     public Body getBody() {

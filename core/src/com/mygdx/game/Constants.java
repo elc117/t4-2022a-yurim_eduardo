@@ -4,8 +4,10 @@ public class Constants {
      public static final int WORLD_WIDTH = 32;
      public static final int WORLD_HEIGHT = 16;
      public static final int TILE_SIZE = 32;
-     public static final int PLAYER_WIDTH = 86;
-     public static final int PLAYER_HEIGHT = 86;
+     public static final int PLAYER_WIDTH = 32;
+     public static final int PLAYER_HEIGHT = 36;
+     public static final int SPRITE_WIDTH = 32;
+     public static final int SPRITE_HEIGHT = 48;
      public static final int NO_CONTACT = 0;
      public static final int LEFT_CONTACT = 1;
      public static final int RIGHT_CONTACT = 2;
