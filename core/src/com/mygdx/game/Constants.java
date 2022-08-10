@@ -1,6 +1,8 @@
 package com.mygdx.game;
 
 public class Constants {
+    public static final int WORLD_WIDTH_TEXTS = 256;
+    public static final int WORLD_HEIGHT_TEXTS = 128;
     public static final int WORLD_WIDTH = 32;
     public static final int WORLD_HEIGHT = 16;
     public static final int TILE_SIZE = 32;
@@ -14,9 +16,14 @@ public class Constants {
     public static int sideContact = NO_CONTACT;
     public static boolean playerOnGround = true;
     public static boolean rightHandSide = true;
-     public static boolean paused = true;
+    public static boolean paused = true;
 
-    public enum State {IDLE, RUNNING_RIGHT, RUNNING_LEFT, JUMPING, FALLING}
+    public enum State {IDLE, RUNNING_RIGHT, RUNNING_LEFT}
 
     ;
+
+    public enum GlobalState {MENU, STORY, GAME, PAUSE, END}
+
+    ;
+    public static GlobalState globalState = GlobalState.MENU;
 }

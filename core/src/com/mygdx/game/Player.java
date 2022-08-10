@@ -74,7 +74,7 @@ public class Player {
 
         batch.draw(currentRegion.get(spriteIndex),
                 body.getPosition().x - (float) SPRITE_WIDTH / TILE_SIZE,
-                body.getPosition().y - (float) SPRITE_HEIGHT / TILE_SIZE,
+                body.getPosition().y - (float) SPRITE_HEIGHT / TILE_SIZE + 0.3f,
                 (float) SPRITE_WIDTH / (TILE_SIZE / 2f),
                 (float) SPRITE_HEIGHT / (TILE_SIZE / 2f));
     }
