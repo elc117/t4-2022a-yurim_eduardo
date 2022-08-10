@@ -1,18 +1,10 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator.FreeTypeFontParameter;
 
 import static com.mygdx.game.Constants.*;
 
@@ -24,20 +16,18 @@ public class PPJogo extends ApplicationAdapter {
     private SpriteBatch batch;
     private int frameCount = 0;
     private Menu menu;
+    Vector3 v3;
 
     @Override
     public void create() {
-        //camera = new OrthographicCamera(WORLD_WIDTH, WORLD_HEIGHT);
-        //camera.setToOrtho(false, WORLD_WIDTH, WORLD_HEIGHT);
-
         camera = new OrthographicCamera(WORLD_WIDTH_TEXTS, WORLD_HEIGHT_TEXTS);
         camera.setToOrtho(false, WORLD_WIDTH_TEXTS, WORLD_HEIGHT_TEXTS);
-
         gMap = new GameMap(camera);
         player = new Player(gMap.getWorld());
         gInput = new GameInput(gMap.getWorld(), player);
         batch = new SpriteBatch();
         menu = new Menu();
+        v3 = new Vector3();
     }
 
     @Override
@@ -50,17 +40,24 @@ public class PPJogo extends ApplicationAdapter {
         cameraUpdate();
         ScreenUtils.clear(0.4f, 0.71f, 1, 1);
         gInput.inputUpdate(player);
-        gMap.update(camera);
-        gMap.renderGameMap(camera);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
-        player.render(batch, camera, frameCount);
-        menu.render(batch);
+        if (GlobalState.GAME == globalState) {
+            gMap.update(camera);
+            gMap.renderGameMap(camera);
+            player.render(batch, frameCount);
+        } else {
+            menu.render(batch);
+        }
         batch.end();
     }
 
     private void cameraUpdate() {
-        Vector3 v3 = new Vector3();
+        if (globalState == GlobalState.GAME) {
+            camera.setToOrtho(false, WORLD_WIDTH, WORLD_HEIGHT);
+        } else if (globalState == GlobalState.END) {
+            camera.setToOrtho(false, WORLD_WIDTH_TEXTS, WORLD_HEIGHT_TEXTS);
+        }
 
         if (player.getBody().getPosition().x > 16 && player.getBody().getPosition().x < 496) {
             v3.x = player.getBody().getPosition().x;
@@ -74,7 +71,10 @@ public class PPJogo extends ApplicationAdapter {
         camera.position.set(v3);
         camera.update();
     }
+
     @Override
     public void dispose() {
+        menu.dispose();
+        gMap.dispose();
     }
 }

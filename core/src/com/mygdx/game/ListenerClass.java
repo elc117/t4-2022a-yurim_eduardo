@@ -7,6 +7,7 @@ import static com.mygdx.game.Constants.*;
 public class ListenerClass implements ContactListener {
     private Player player;
     private Fixture fA, fB;
+
     public ListenerClass(Player player) {
         this.player = player;
     }

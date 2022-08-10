@@ -10,6 +10,7 @@ public class GamePhysics {
 
     public GamePhysics() {
     }
+
     public BodyDef bodyDefCreate(float x, float y, boolean isDynamic) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(x, y);

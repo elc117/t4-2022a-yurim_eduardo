@@ -1,4 +1,5 @@
 package com.mygdx.game;
+
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.math.Rectangle;
@@ -12,23 +13,22 @@ import com.badlogic.gdx.maps.objects.*;
 
 public class GameMap {
     private final World world;
-    private final Box2DDebugRenderer debugRenderer;
     private final TiledMap map;
     private final OrthogonalTiledMapRenderer mapRenderer;
-    private GamePhysics gPhysics;
+    private final GamePhysics gPhysics;
 
     public GameMap(OrthographicCamera camera) {
         world = new World(new Vector2(0, -10), true);
-        debugRenderer = new Box2DDebugRenderer();
         gPhysics = new GamePhysics();
         map = new TmxMapLoader().load("tileset/ground.tmx");
         mapRenderer = new OrthogonalTiledMapRenderer(map, 1f / Constants.TILE_SIZE);
         embodyTiles(world, map);
     }
-    public void update (OrthographicCamera camera){
+
+    public void update(OrthographicCamera camera) {
         mapRenderer.setView(camera);
-        Batch alex = mapRenderer.getBatch();
-        alex.setProjectionMatrix(camera.combined);
+        Batch bCam = mapRenderer.getBatch();
+        bCam.setProjectionMatrix(camera.combined);
     }
 
     public World getWorld() {
@@ -36,7 +36,6 @@ public class GameMap {
     }
 
     public void renderGameMap(OrthographicCamera camera) {
-        debugRenderer.render(world, camera.combined);
         mapRenderer.render();
         world.step(1 / 60f, 6, 2);
     }
@@ -49,5 +48,8 @@ public class GameMap {
             Rectangle rect = obj.getRectangle();
             gPhysics.rectangularBodyCreate(world, rect, false);
         }
+    }
+    public void dispose() {
+
     }
 }

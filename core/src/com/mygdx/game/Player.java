@@ -1,7 +1,6 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -19,9 +18,9 @@ public class Player {
     private ArrayList<TextureRegion> runningLeft;
     private int spriteIndex = 0;
     private Body body;
-    private TextureRegion trPlayer;
     private State currentState = State.IDLE;
     private State previousState = State.IDLE;
+    private BodyDef bdef;
 
     public Player(World world) {
         createSprites();
@@ -29,7 +28,6 @@ public class Player {
     }
 
     private ArrayList<TextureRegion> arrayListInitialize(Texture texture, int size, boolean flip) {
-        // podemos retornar o array
         TextureRegion region;
         ArrayList<TextureRegion> regions = new ArrayList<TextureRegion>();
         for (int i = 0; i < size; i++) {
@@ -48,7 +46,7 @@ public class Player {
         return regions;
     }
 
-    public void render(SpriteBatch batch, OrthographicCamera camera, int frameCount) {
+    public void render(SpriteBatch batch, int frameCount) {
         ArrayList<TextureRegion> currentRegion;
 
         if (currentState != previousState) {
@@ -65,7 +63,7 @@ public class Player {
             currentRegion = idleLeft;
         }
 
-        if (!paused && frameCount % 5 == 0) {
+        if (frameCount % 5 == 0) {
             spriteIndex++;
             if (spriteIndex >= currentRegion.size()) {
                 spriteIndex = 0;
@@ -93,11 +91,10 @@ public class Player {
 
     private void createFixtures(World world) {
         PolygonShape shape = new PolygonShape();
-        BodyDef bdef = new BodyDef();
+        bdef = new BodyDef();
         FixtureDef fdef = new FixtureDef();
 
-        bdef.position.set(16 + PLAYER_WIDTH / 64f, 10 + PLAYER_HEIGHT / 64f);
-        //bdef.position.set(490 + PLAYER_WIDTH / 64f, 10 + PLAYER_HEIGHT / 64f);//teste posicao fim do mapa
+        bdef.position.set(16 + PLAYER_WIDTH / 64f, 14 + PLAYER_HEIGHT / 64f);
 
         bdef.type = BodyDef.BodyType.DynamicBody;
         body = world.createBody(bdef);
@@ -135,10 +132,6 @@ public class Player {
 
     public Body getBody() {
         return body;
-    }
-
-    public State getCurrentState() {
-        return currentState;
     }
 
     public void setCurrentState(State currentState) {

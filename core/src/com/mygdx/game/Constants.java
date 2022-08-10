@@ -16,13 +16,12 @@ public class Constants {
     public static int sideContact = NO_CONTACT;
     public static boolean playerOnGround = true;
     public static boolean rightHandSide = true;
-    public static boolean paused = true;
 
     public enum State {IDLE, RUNNING_RIGHT, RUNNING_LEFT}
 
     ;
 
-    public enum GlobalState {MENU, STORY, GAME, PAUSE, END}
+    public enum GlobalState {MENU, STORY, GAME, END}
 
     ;
     public static GlobalState globalState = GlobalState.MENU;
