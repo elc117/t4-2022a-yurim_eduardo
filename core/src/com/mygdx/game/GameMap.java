@@ -17,7 +17,7 @@ public class GameMap {
     private final OrthogonalTiledMapRenderer mapRenderer;
     private final GamePhysics gPhysics;
 
-    public GameMap(OrthographicCamera camera) {
+    public GameMap() {
         world = new World(new Vector2(0, -10), true);
         gPhysics = new GamePhysics();
         map = new TmxMapLoader().load("tileset/ground.tmx");
@@ -35,7 +35,7 @@ public class GameMap {
         return world;
     }
 
-    public void renderGameMap(OrthographicCamera camera) {
+    public void renderGameMap() {
         mapRenderer.render();
         world.step(1 / 60f, 6, 2);
     }
@@ -50,6 +50,8 @@ public class GameMap {
         }
     }
     public void dispose() {
-
+        world.dispose();
+        map.dispose();
+        mapRenderer.dispose();
     }
 }

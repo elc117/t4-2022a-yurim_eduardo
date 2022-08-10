@@ -22,7 +22,7 @@ public class PPJogo extends ApplicationAdapter {
     public void create() {
         camera = new OrthographicCamera(WORLD_WIDTH_TEXTS, WORLD_HEIGHT_TEXTS);
         camera.setToOrtho(false, WORLD_WIDTH_TEXTS, WORLD_HEIGHT_TEXTS);
-        gMap = new GameMap(camera);
+        gMap = new GameMap();
         player = new Player(gMap.getWorld());
         gInput = new GameInput(gMap.getWorld(), player);
         batch = new SpriteBatch();
@@ -44,7 +44,7 @@ public class PPJogo extends ApplicationAdapter {
         batch.begin();
         if (GlobalState.GAME == globalState) {
             gMap.update(camera);
-            gMap.renderGameMap(camera);
+            gMap.renderGameMap();
             player.render(batch, frameCount);
         } else {
             menu.render(batch);
@@ -76,5 +76,6 @@ public class PPJogo extends ApplicationAdapter {
     public void dispose() {
         menu.dispose();
         gMap.dispose();
+        batch.dispose();
     }
 }
